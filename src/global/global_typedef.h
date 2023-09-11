@@ -5,8 +5,8 @@
 #ifndef GLOBAL_TYPEDEF_H
 #define GLOBAL_TYPEDEF_H
 
-#define KEY_TYPE long
-#define PAYLOAD_TYPE long
+// #define KEY_TYPE long
+// #define PAYLOAD_TYPE long
 
 typedef std::vector<int> intVec;
 typedef std::vector<double> doubleVec;

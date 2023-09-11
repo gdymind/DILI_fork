@@ -15,7 +15,7 @@ void linearRegressor::copy_from(linearRegressor *rhs) {
     delta_x = rhs->delta_x;
 }
 
-void linearRegressor::init(long *_data, int left_start_idx, int start_idx, int fanout) {
+void linearRegressor::init(const long *_data, int left_start_idx, int start_idx, int fanout) {
 
     a = 0;
     b = 0;
@@ -23,7 +23,7 @@ void linearRegressor::init(long *_data, int left_start_idx, int start_idx, int f
     _de_b = 0;
     sum_x = 0;
 //    sum_y = 0;
-    long *data = _data + start_idx;
+    const long *data = _data + start_idx;
     long left_min = _data[left_start_idx];
     long x_min = data[0];
 
@@ -40,7 +40,7 @@ void linearRegressor::init(long *_data, int left_start_idx, int start_idx, int f
     cal_ab(fanout, x_min);
 }
 
-void linearRegressor::init_w_sampling(long *_data, int left_start_idx, int start_idx, int fanout) {
+void linearRegressor::init_w_sampling(const long *_data, int left_start_idx, int start_idx, int fanout) {
 
     a = 0;
     b = 0;
@@ -48,7 +48,7 @@ void linearRegressor::init_w_sampling(long *_data, int left_start_idx, int start
     _de_b = 0;
     sum_x = 0;
 //    sum_y = 0;
-    long *data = _data + start_idx;
+    const long *data = _data + start_idx;
     long left_min = _data[left_start_idx];
     long x_min = data[0];
 
@@ -216,7 +216,7 @@ void linearRegressor::merge_w_sampling(linearRegressor *lhs, linearRegressor *rh
 
 
 
-double linearRegressor::cal_loss(long *data, int fanout) {
+double linearRegressor::cal_loss(const long *data, int fanout) {
     double loss = 0;
     for (int i = 0; i < fanout; ++i) {
         double pred = a + b * data[i];
@@ -228,7 +228,7 @@ double linearRegressor::cal_loss(long *data, int fanout) {
     return loss;
 }
 
-double linearRegressor::cal_loss_w_sampling(long *data, int fanout) {
+double linearRegressor::cal_loss_w_sampling(const long *data, int fanout) {
     double loss = 0;
     for (int i = 0; i < fanout; i += sampling_factor) {
         double pred = a + b * data[i];
@@ -260,7 +260,7 @@ void linearRegressor::print_cal_ab(int fanout) {
     printf("mean_x * mean_x * fanout = %.2lf\n", mean_x * mean_x * fanout);
 }
 
-void linearRegressor::print(long *data, int fanout) {
+void linearRegressor::print(const long *data, int fanout) {
     printf("a = %.2lf, b = %.2lf, sum_x = %.2lf, _de_b = %.2lf, _nu_b = %.2lf\n", a, b, sum_x, _de_b, _nu_b);
 //    cout << "a = " << a << ", b = " << b << ", sum_x = " << sum_x << ", _de_b = " << _de_b << ", _nu_b = " << _nu_b << endl;
     if (data && fanout > 0) {

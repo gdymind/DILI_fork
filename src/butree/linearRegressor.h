@@ -18,8 +18,8 @@ public:
     linearRegressor(linearRegressor *rhs): a(rhs->a), b(rhs->b), _de_b(rhs->_de_b), _nu_b(rhs->_nu_b), sum_x(rhs->sum_x), delta_x(rhs->delta_x) {}
 
 //    void init(long *data, int fanout);
-    void init(long *_data, int left_start_idx, int start_idx, int fanout);
-    void init_w_sampling(long *_data, int left_start_idx, int start_idx, int fanout);
+    void init(const long *_data, int left_start_idx, int start_idx, int fanout);
+    void init_w_sampling(const long *_data, int left_start_idx, int start_idx, int fanout);
     void copy_from(linearRegressor *rhs);
 
     void merge_and_self_update(linearRegressor *rhs, int left_fan, int right_fan, long x_min);
@@ -30,10 +30,10 @@ public:
     void cal_ab(int fanout, long x_min);
     void cal_ab_w_sampling(int fanout, long x_min);
 
-    double cal_loss(long *data, int fanout);
-    double cal_loss_w_sampling(long *data, int fanout);
+    double cal_loss(const long *data, int fanout);
+    double cal_loss_w_sampling(const long *data, int fanout);
 
-    void print(long *data, int fanout);
+    void print(const long *data, int fanout);
 
     void set_delta_x(long dx) { delta_x = dx; }
 
